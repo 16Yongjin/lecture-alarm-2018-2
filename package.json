@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js PORT=8848"
+    "start": "PORT=8848 node src/app.js"
   },
   "author": "",
   "license": "ISC",
