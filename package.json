@@ -1,0 +1,27 @@
+{
+  "name": "lecture-alram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mz": "^2.7.0",
+    "partial-js": "^1.1.5",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.8",
+    "@types/express": "^4.16.0",
+    "@types/mz": "0.0.32",
+    "@types/request-promise": "^4.1.42"
+  }
+}
