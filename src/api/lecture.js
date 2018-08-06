@@ -43,7 +43,13 @@ const parseLectures = dep => $ => $( trs($) ).map((idx, tr) => {
   })
   .get()
 
-const list = dep => _.go(dep, depToUrl, rp, cheerio.load, parseLectures(dep))
+
+const asyncMemoize = fn => {
+  const cache = {}
+  return arg => cache[arg] ? Promise.resolve(cache[arg]) : fn(arg).then(res => (cache[arg] = res, res))
+}
+
+const list = asyncMemoize(dep => _.go(dep, depToUrl, rp, cheerio.load, parseLectures(dep)))
 
 const filterEmpty = indeces => $ => 
   indeces.filter(idx => _.go($( trs($) ).eq(idx).children('td').eq(14).text(), isEmpty))
