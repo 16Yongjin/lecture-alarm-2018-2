@@ -1,5 +1,5 @@
 const _ = require('partial-js')
-const { state, add, remove } = require('../database/index')
+const { state, remove } = require('../database/index')
 const Lecture = require('./lecture')
 const send = require('./send')
 
