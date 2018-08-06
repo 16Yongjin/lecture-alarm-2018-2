@@ -14,12 +14,12 @@ const depToUrl = (department) =>
 
 const infos = {
   0: 'no',
-  2: 'year',
-  3: 'id',
+  // 2: 'year',
+  // 3: 'id',
   4: 'name',
   10: 'professor',
   13: 'info',
-  14: 'people'
+  // 14: 'people'
 }
 
 const trim = str => str.trim().replace(/\s{2,}/, '').replace(/\s?\(.+$/, '')
@@ -37,7 +37,7 @@ const parseLectures = dep => $ => $( trs($) ).map((idx, tr) => {
 
     const lecture = { dep }
     $(tr).children('td').each((i, td) => infos[i] && (lecture[infos[i]] = trim($(td).text())))
-    lecture.isEmpty = isEmpty(lecture.people)
+    // lecture.isEmpty = isEmpty(lecture.people)
 
     return lecture
   })
@@ -51,7 +51,8 @@ const filterEmpty = indeces => $ =>
 const check = (dep, indeces) =>
   _.go(dep, depToUrl, rp, cheerio.load, filterEmpty(indeces))
 
-// list('포르투갈어과').then(ls => console.log(ls))
+// console.time('r') 
+// list('포르투갈어과').then(ls => console.timeEnd('r') )
 // check('포르투갈어과', [1, 2, 3, 4, 5]).then(console.log)
 
 const Lecture = {

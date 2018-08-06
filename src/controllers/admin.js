@@ -9,7 +9,7 @@ const getStatus = (req, res) => {
 const setLoopInterval = (req, res) => {
   const interval = Math.max(req.params.interval, 1000)
   looper.setInterval(interval)
-  res.send(interval)
+  res.send({ interval })
 }
 
 module.exports = { getStatus, setLoopInterval }
