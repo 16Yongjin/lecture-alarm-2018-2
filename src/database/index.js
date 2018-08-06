@@ -13,7 +13,7 @@ const backup = state => fs.writeFile('src/database/state.json', JSON.stringify(s
 const restore = () => 
     fs.readFile('src/database/state.json', 'utf-8')
       .then(backuped => Object.assign(state, JSON.parse(backuped)) )
-      .catch(console.error)
+      .catch((() => console.error('backup failed')))
 
 // lec: { no, name, prof, ...info }
 const add = (token, lecture) => {
