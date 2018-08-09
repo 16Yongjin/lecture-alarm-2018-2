@@ -12,8 +12,12 @@ const sendAndRemove = (token, dep, no) => {
 }
 
 const Loop = () => {
-  const hour = (new Date()).getHours()
-  if (!(10 <= hour && hour < 16)) return console.log('skip')
+  const date = new Date()
+  const day = date.getDate()
+  const hour = date.getHours()
+
+  if (!(3 <= day && day <= 10)) return // console.log('day skip')
+  if (!(10 <= hour && hour < 16)) return // console.log('hour skip')
 
   _.go(
     Object.entries(state.departments),

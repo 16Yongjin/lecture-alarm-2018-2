@@ -46,7 +46,7 @@ const parseLectures = dep => $ => $( trs($) ).map((idx, tr) => {
 
 const asyncMemoize = fn => {
   const cache = {}
-  return arg => cache[arg] ? Promise.resolve(cache[arg]) : fn(arg).then(res => (cache[arg] = res, res))
+  return arg => cache[arg] ? Promise.resolve(cache[arg]) : fn(arg).then(res => (cache[arg] = res))
 }
 
 const list = asyncMemoize(dep => _.go(dep, depToUrl, rp, cheerio.load, parseLectures(dep)))
