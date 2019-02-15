@@ -5,8 +5,8 @@ const depsToId = require('./deps')
 const libsToId = require('./libs')
 const types = ['no', 'area', 'year', 'id', 'name', 'syllabus', 'required', 'online', 'foreign', 'teamTeaching', 'professor', 'credit', 'time', 'timeRoom', 'people', 'note']
 
-const baseUrl = 'http://wis.hufs.ac.kr:8989/src08/jsp/lecture/LECTURE2020L.jsp?tab_lang=K&ag_ledg_year=2019&ag_ledg_sessn=1&ag_org_sect=A&campus_sect=h1&'
-const url = (gubun, dep) => `${baseUrl}gubun=${gubun}&ag_crs_strct_cd=${dep}&ag_compt_fld_cd=${dep}`
+const baseUrl = 'http://wis.hufs.ac.kr:8989/src08/jsp/lecture/LECTURE2020L.jsp?tab_lang=K&ag_ledg_year=2019&ag_ledg_sessn=1&ag_org_sect=A'
+const url = (gubun, dep) => encodeURI(`${baseUrl}&campus_sect=${dep.slice(-2)}&gubun=${gubun}&ag_crs_strct_cd=${dep}&ag_compt_fld_cd=${dep}`)
 
 const depToUrl = (department) =>
   depsToId[department] ? url('1', depsToId[department]) :
@@ -55,7 +55,7 @@ const check = (dep, indeces) =>
   _.go(dep, depToUrl, rp, cheerio.load, filterEmpty(indeces))
 
 // console.time('r') 
-// list('인문강좌').then(ls => console.log(ls) )
+// list('(글로벌) 미네르바인문').then(ls => console.log(ls) )
 // check('포르투갈어과', [1, 2, 3, 4, 5]).then(console.log)
 
 const Lecture = {

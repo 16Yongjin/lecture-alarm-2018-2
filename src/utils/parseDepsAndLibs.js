@@ -2,7 +2,7 @@ const cheerio = require('cheerio')
 const rp = require('request-promise')
 
 const main = async () => {
-  const html = await rp('http://wis.hufs.ac.kr:8989/src08/jsp/lecture/LECTURE2020L.jsp')
+  const html = await rp('http://wis.hufs.ac.kr:8989/src08/jsp/lecture/LECTURE2020L.jsp?tab_lang=K&ag_ledg_year=2019&ag_ledg_sessn=1&ag_org_sect=A&campus_sect=H2&gubun=1&ag_crs_strct_cd=AQR02_H2&ag_compt_fld_cd=303_H2')
   const $ = cheerio.load(html)
 
   const $deps = $('select[name="ag_crs_strct_cd"] > option')
@@ -25,8 +25,8 @@ const main = async () => {
   
 
 
-  console.log(deps)
-  // console.log(libs)
+  // console.log(deps)
+  console.log(libs)
 
   
 }

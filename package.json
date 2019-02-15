@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "PORT=8848 nodemon src/app.js",
     "start": "PORT=8848 node src/app.js"
   },
   "author": "",
