@@ -25,8 +25,8 @@ const main = async () => {
   
 
 
-
-  console.log(libs)
+  console.log(deps)
+  // console.log(libs)
 
   
 }

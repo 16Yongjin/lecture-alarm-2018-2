@@ -5,7 +5,7 @@ const depsToId = require('./deps')
 const libsToId = require('./libs')
 const types = ['no', 'area', 'year', 'id', 'name', 'syllabus', 'required', 'online', 'foreign', 'teamTeaching', 'professor', 'credit', 'time', 'timeRoom', 'people', 'note']
 
-const baseUrl = 'http://wis.hufs.ac.kr:8989/src08/jsp/lecture/LECTURE2020L.jsp?tab_lang=K&ag_ledg_year=2018&ag_ledg_sessn=3&ag_org_sect=A&campus_sect=h1&'
+const baseUrl = 'http://wis.hufs.ac.kr:8989/src08/jsp/lecture/LECTURE2020L.jsp?tab_lang=K&ag_ledg_year=2019&ag_ledg_sessn=1&ag_org_sect=A&campus_sect=h1'
 const url = (gubun, dep) => `${baseUrl}gubun=${gubun}&ag_crs_strct_cd=${dep}&ag_compt_fld_cd=${dep}`
 
 const depToUrl = (department) =>
@@ -24,10 +24,8 @@ const infos = {
 
 const trim = str => str.trim().replace(/\s{2,}/, '').replace(/\s?\(.+$/, '')
 
-const isEmpty = (people = '') => {
-  const slash = people.indexOf('/')
-  if (~slash)
-    return !((people.slice(0, slash) / people.slice(slash + 1)) | 0)
+function isEmpty (people) {
+  try { return people && eval(people) < 1 } catch(e) { }
 }
 
 const trs = $ => $('div#premier1 > div.table > table > tbody > tr')
@@ -44,10 +42,9 @@ const parseLectures = dep => $ => $( trs($) ).map((idx, tr) => {
   .get()
 
 
-const asyncMemoize = fn => {
-  const cache = {}
-  return arg => cache[arg] ? Promise.resolve(cache[arg]) : fn(arg).then(res => (cache[arg] = res))
-}
+const asyncMemoize = (fn, cache = {}) =>
+  arg => cache[arg] ? Promise.resolve(cache[arg]) : fn(arg).then(res => (cache[arg] = res))
+
 
 const list = asyncMemoize(dep => _.go(dep, depToUrl, rp, cheerio.load, parseLectures(dep)))
 
@@ -58,7 +55,7 @@ const check = (dep, indeces) =>
   _.go(dep, depToUrl, rp, cheerio.load, filterEmpty(indeces))
 
 // console.time('r') 
-// list('포르투갈어과').then(ls => console.timeEnd('r') )
+// list('포르투갈어과').then(ls => console.log(ls) )
 // check('포르투갈어과', [1, 2, 3, 4, 5]).then(console.log)
 
 const Lecture = {
