@@ -16,7 +16,7 @@ const Loop = () => {
   const day = date.getDate()
   const hour = date.getHours()
 
-  if (!(3 <= day && day <= 10)) return // console.log('day skip')
+  if (!(4 <= day && day <= 15)) return // console.log('day skip')
   if (!(10 <= hour && hour < 16)) return // console.log('hour skip')
 
   _.go(
